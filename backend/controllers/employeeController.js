@@ -58,7 +58,8 @@ exports.addEmployee = async (req, res) => {
 // @access  Private
 exports.deleteEmployee = async (req, res) => {
     try {
-        const employee = await Employee.findById(req.params.id);
+        const trimmedId = String(req.params.id).trim();
+        const employee = await Employee.findById(trimmedId);
 
         if (!employee) {
             return res.status(404).json({ message: 'Employee not found' });
@@ -78,7 +79,8 @@ exports.updateEmployee = async (req, res) => {
     try {
         const { performanceScore, skills, department, experience } = req.body;
         
-        const employee = await Employee.findById(req.params.id);
+        const trimmedId = String(req.params.id).trim();
+        const employee = await Employee.findById(trimmedId);
 
         if (!employee) {
             return res.status(404).json({ message: 'Employee not found' });

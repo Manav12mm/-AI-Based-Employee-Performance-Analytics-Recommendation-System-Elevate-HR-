@@ -12,7 +12,8 @@ exports.generateRecommendation = async (req, res) => {
             return res.status(400).json({ message: 'Employee ID is required' });
         }
 
-        const employee = await Employee.findById(employeeId);
+        const trimmedId = String(employeeId).trim();
+        const employee = await Employee.findById(trimmedId);
 
         if (!employee) {
             return res.status(404).json({ message: 'Employee not found' });
