@@ -14,16 +14,16 @@
 }
 
 .dark {
-  --bg-color: #09090b; /* Pure High-End Black Zinc */
-  --text-color: #fafafa; /* Bright White Slate */
-  --card-bg: #18181b; /* Solid Dark Slate-zinc Card */
-  --card-border: #27272a; /* Zinc Border */
-  --navbar-bg: #09090b; /* Matching Pure Black Navbar */
-  --navbar-border: #27272a; /* Matching Zinc Border */
-  --text-muted: #a1a1aa; /* Pale Zinc Muted Text */
-  --input-bg: #18181b; /* Solid dark input */
-  --input-border: #27272a; /* Zinc input border */
-  --dashboard-header-bg: #18181b;
+  --bg-color: #080c14; /* Deep luxury Midnight Blue */
+  --text-color: #f8fafc; /* Crystal-clear bright slate */
+  --card-bg: #0f1626; /* Deep blue-slate card background */
+  --card-border: #1e293b; /* Slate-800 indigo-blue borders */
+  --navbar-bg: #080c14; /* Matching Midnight Blue Navbar */
+  --navbar-border: #1e293b; /* Matching Slate-800 border */
+  --text-muted: #94a3b8; /* Slate-400 readable gray */
+  --input-bg: #0f1626; /* Matching deep input */
+  --input-border: #1e293b; /* Indigo-slate borders */
+  --dashboard-header-bg: #0f1626;
 }
 
 body {
@@ -34,11 +34,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Beautiful dynamic background highlights for dark mode */
+/* Beautiful dynamic background highlights with light blue shades */
 .dark body {
   background-image: 
-    radial-gradient(circle at top right, rgba(217, 119, 6, 0.08), transparent 450px),
-    radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.04), transparent 450px);
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 500px), /* Sky-blue glow */
+    radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.07), transparent 500px); /* Light indigo glow */
   background-attachment: fixed;
 }
 
