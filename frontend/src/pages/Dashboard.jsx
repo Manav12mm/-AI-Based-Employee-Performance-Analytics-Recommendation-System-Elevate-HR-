@@ -433,7 +433,7 @@ const Dashboard = () => {
       {/* View Directory Header */}
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-stone-200">
         <h1 className="text-2xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2 capitalize">
-          ElevateHR Console &gt; <span className="text-amber-700 font-bold">{activeView}</span>
+          ElevateHR Console &gt; <span className="text-amber-700 font-bold">{activeView === 'directory' ? 'Directory' : activeView}</span>
         </h1>
         
         {/* Dynamic Sidebar Tabs switcher directly inside Dashboard */}
