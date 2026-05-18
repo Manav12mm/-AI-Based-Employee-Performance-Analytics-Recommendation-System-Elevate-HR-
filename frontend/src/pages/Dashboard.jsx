@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, Sparkles, Trash2 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const Dashboard = () => {
   const [employees, setEmployees] = useState([]);
@@ -16,8 +17,8 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const url = searchQuery 
-        ? `http://localhost:5000/api/employees/search?department=${searchQuery}`
-        : 'http://localhost:5000/api/employees';
+        ? `${API_BASE_URL}/api/employees/search?department=${searchQuery}`
+        : `${API_BASE_URL}/api/employees`;
       
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -42,7 +43,7 @@ const Dashboard = () => {
   const deleteEmployee = async (id) => {
     if (window.confirm('Are you sure you want to delete this employee?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/employees/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/employees/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchEmployees(search);
@@ -57,7 +58,7 @@ const Dashboard = () => {
     setSelectedEmp(employee.name);
     setRecommendation(null);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/recommend', 
+      const res = await axios.post(`${API_BASE_URL}/api/ai/recommend`, 
         { employeeId: employee._id },
         { headers: { Authorization: `Bearer ${token}` }}
       );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 const AddEmployee = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ const AddEmployee = () => {
         experience: Number(formData.experience)
       };
 
-      await axios.post('http://localhost:5000/api/employees', payload, {
+      await axios.post(`${API_BASE_URL}/api/employees`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
