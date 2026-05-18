@@ -14,31 +14,31 @@
 }
 
 .dark {
-  --bg-color: #0b0f19; /* Deep luxurious Midnight Space Obsidian */
-  --text-color: #f8fafc; /* Slate-50 bright text */
-  --card-bg: rgba(17, 24, 39, 0.7); /* Luxury glassmorphic slate-900 */
-  --card-border: rgba(31, 41, 55, 0.6); /* Slate-800 border */
-  --navbar-bg: rgba(15, 23, 42, 0.85); /* Slate-900 glassmorphic navbar */
-  --navbar-border: rgba(30, 41, 59, 0.8); /* Slate-800 border */
-  --text-muted: #9ca3af; /* slate-400 */
-  --input-bg: #1f2937; /* slate-800 input */
-  --input-border: #374151; /* slate-700 input border */
-  --dashboard-header-bg: rgba(17, 24, 39, 0.8);
+  --bg-color: #09090b; /* Pure High-End Black Zinc */
+  --text-color: #fafafa; /* Bright White Slate */
+  --card-bg: #18181b; /* Solid Dark Slate-zinc Card */
+  --card-border: #27272a; /* Zinc Border */
+  --navbar-bg: #09090b; /* Matching Pure Black Navbar */
+  --navbar-border: #27272a; /* Matching Zinc Border */
+  --text-muted: #a1a1aa; /* Pale Zinc Muted Text */
+  --input-bg: #18181b; /* Solid dark input */
+  --input-border: #27272a; /* Zinc input border */
+  --dashboard-header-bg: #18181b;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Beautiful dynamic ambient background gradient for obsidian night mode */
+/* Beautiful dynamic background highlights for dark mode */
 .dark body {
   background-image: 
-    radial-gradient(circle at 85% 15%, rgba(217, 119, 6, 0.08), transparent 500px),
-    radial-gradient(circle at 15% 85%, rgba(245, 158, 11, 0.05), transparent 500px);
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.08), transparent 450px),
+    radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.04), transparent 450px);
   background-attachment: fixed;
 }
 
@@ -46,21 +46,18 @@ body {
 .bg-white, .\[\&_form\]\:bg-white, .\[\&_div\]\:bg-white {
   background-color: var(--card-bg) !important;
   border-color: var(--card-border) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark .bg-white {
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 .bg-\[\#fffbeb\] {
   background-color: var(--navbar-bg) !important;
   border-color: var(--navbar-border) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .border-amber-100 {
@@ -75,11 +72,36 @@ body {
   background-color: var(--input-bg) !important;
 }
 
-.text-stone-900, .text-stone-850, .text-stone-800 {
+/* HIGHREADABILITY CONTRAST OVERRIDES FOR NIGHT MODE TEXT */
+.dark h1, 
+.dark h2, 
+.dark h3, 
+.dark h4, 
+.dark h5, 
+.dark p, 
+.dark span, 
+.dark label,
+.dark .text-stone-900, 
+.dark .text-stone-850, 
+.dark .text-stone-800, 
+.dark .text-stone-700, 
+.dark .text-slate-900, 
+.dark .text-slate-800, 
+.dark .text-slate-700,
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
   color: var(--text-color) !important;
 }
 
-.text-stone-700, .text-stone-600, .text-stone-500 {
+.dark .text-stone-600, 
+.dark .text-stone-500, 
+.dark .text-slate-600, 
+.dark .text-slate-500, 
+.dark .text-gray-600, 
+.dark .text-gray-500, 
+.dark .text-stone-400,
+.dark .text-slate-400 {
   color: var(--text-muted) !important;
 }
 
@@ -92,11 +114,11 @@ input, select, textarea {
 /* Beautiful dark mode button glows */
 .dark button.bg-amber-600 {
   background-color: #d97706 !important;
-  box-shadow: 0 4px 14px 0 rgba(217, 119, 6, 0.3) !important;
+  box-shadow: 0 4px 14px 0 rgba(217, 119, 6, 0.35) !important;
 }
 .dark button.bg-amber-600:hover {
   background-color: #b45309 !important;
-  box-shadow: 0 6px 20px 0 rgba(217, 119, 6, 0.4) !important;
+  box-shadow: 0 6px 20px 0 rgba(217, 119, 6, 0.45) !important;
 }
 
 /* Subtle transitions for sleek UX theme switcher */
