@@ -1,11 +1,75 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Users, Award, BookOpen, Star, Send, ArrowRight, Zap, Target } from 'lucide-react';
+import { Sparkles, Users, Award, BookOpen, Star, Send, ArrowRight, Zap, Target, ShieldCheck, Database, Brain, ArrowDown } from 'lucide-react';
 
 const Home = () => {
   const token = localStorage.getItem('token');
   const [feedback, setFeedback] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+
+  // New Interactive AI Demo states
+  const [activeTab, setActiveTab] = useState(0);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [typedResponse, setTypedResponse] = useState('');
+  const [inferenceComplete, setInferenceComplete] = useState(false);
+
+  const mockEmployees = [
+    {
+      name: "Aditi Sharma",
+      role: "Lead Data Scientist",
+      score: 94,
+      experience: 6,
+      skills: ["Python", "TensorFlow", "Kubernetes", "PyTorch"],
+      department: "Data Science",
+      recommendation: "🚀 HIGHLY RECOMMENDED FOR PROMOTION\n\nAditi ranks in the top 2% of the enterprise engineering division.\n\n• Key Insights: Excellent leadership in deep-learning model scaling.\n• Skills Coverage: 98% skill alignment with Senior Principal Architect.\n• Training Actions: Nominate for advanced Executive Leadership training.\n• Promotion Path: Promotable to Senior Director of Engineering immediately."
+    },
+    {
+      name: "Rohan Patel",
+      role: "Frontend Engineer",
+      score: 78,
+      experience: 3,
+      skills: ["React", "TypeScript", "Tailwind CSS", "Redux"],
+      department: "UX / Frontend",
+      recommendation: "💡 TARGETED PERFORMANCE BOOST DETECTED\n\nRohan demonstrates solid design implementation skills with high styling efficiency.\n\n• Key Insights: Exceptional micro-animations design and prompt delivery.\n• Skill Deficit: Node.js / Server-side rendering APIs gap identified.\n• Training Actions: Enroll in 'Fullstack Node.js Advanced Architecture'.\n• Promotion Path: Target Promotion to Senior Frontend in 6 months."
+    },
+    {
+      name: "Neha Gupta",
+      role: "Backend Architect",
+      score: 91,
+      experience: 5,
+      skills: ["Node.js", "Express", "MongoDB", "Docker", "AWS"],
+      department: "Cloud Platforms",
+      recommendation: "🏆 PREPARED FOR TECHNICAL LEAD LEADERSHIP\n\nNeha has achieved stellar service reliability architectures over the last two quarters.\n\n• Key Insights: Engineered microservices architecture saving 25% compute cost.\n• Skills Coverage: Excellent server-side, Dockerization, and cloud management.\n• Training Actions: Curate coursework on 'Advanced System Architecture Design'.\n• Promotion Path: Transition to Technical Lead role starting next sprint."
+    }
+  ];
+
+  // Trigger typing simulation when active tab changes
+  useEffect(() => {
+    setIsSimulating(true);
+    setInferenceComplete(false);
+    setTypedResponse('');
+    
+    const timer1 = setTimeout(() => {
+      setIsSimulating(false);
+      setInferenceComplete(true);
+      
+      // Simulate rapid typewriter output
+      const fullText = mockEmployees[activeTab].recommendation;
+      let currentIndex = 0;
+      const interval = setInterval(() => {
+        if (currentIndex < fullText.length) {
+          setTypedResponse(fullText.substring(0, currentIndex + 5));
+          currentIndex += 5;
+        } else {
+          setTypedResponse(fullText);
+          clearInterval(interval);
+        }
+      }, 10);
+      return () => clearInterval(interval);
+    }, 1200); // simulated inference delay
+
+    return () => clearTimeout(timer1);
+  }, [activeTab]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,8 +108,8 @@ const Home = () => {
   ];
 
   return (
-    <div className="space-y-28 pb-20 font-sans relative overflow-hidden bg-[#fafaf9]">
-      {/* Custom Styles for Glassmorphic Elements & Float Animations */}
+    <div className="space-y-32 pb-24 font-sans relative overflow-hidden bg-[#fafaf9]">
+      {/* Premium CSS Keyframes & Glassmorphic Declarations */}
       <style>{`
         @keyframes float-blob {
           0%, 100% { transform: translate(0px, 0px) scale(1); }
@@ -57,11 +121,16 @@ const Home = () => {
           33% { transform: translate(-30px, 40px) scale(0.9); }
           66% { transform: translate(25px, -20px) scale(1.05); }
         }
+        @keyframes pulse-ring {
+          0% { transform: scale(0.95); opacity: 0.5; }
+          50% { transform: scale(1); opacity: 0.8; }
+          100% { transform: scale(0.95); opacity: 0.5; }
+        }
         .animate-blob-1 {
-          animation: float-blob 12s infinite alternate ease-in-out;
+          animation: float-blob 14s infinite alternate ease-in-out;
         }
         .animate-blob-2 {
-          animation: float-blob-delayed 15s infinite alternate ease-in-out;
+          animation: float-blob-delayed 18s infinite alternate ease-in-out;
         }
         .glass-card {
           background: rgba(255, 255, 255, 0.7);
@@ -70,30 +139,32 @@ const Home = () => {
           border: 1px solid rgba(231, 229, 228, 0.5);
         }
         .glow-hover:hover {
-          box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.15);
+          box-shadow: 0 25px 50px -12px rgba(217, 119, 6, 0.12);
+        }
+        .console-glow {
+          box-shadow: inset 0 0 20px rgba(217, 119, 6, 0.05);
         }
       `}</style>
 
-      {/* Decorative Interactive Background Blobs */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-amber-200/40 rounded-full blur-3xl filter animate-blob-1 pointer-events-none"></div>
-      <div className="absolute top-40 right-10 w-[450px] h-[450px] bg-orange-200/30 rounded-full blur-3xl filter animate-blob-2 pointer-events-none"></div>
-      <div className="absolute top-[800px] left-1/3 w-80 h-80 bg-rose-200/20 rounded-full blur-3xl filter animate-blob-1 pointer-events-none"></div>
+      {/* Atmospheric Blur Blobs */}
+      <div className="absolute top-10 left-10 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[100px] filter animate-blob-1 pointer-events-none"></div>
+      <div className="absolute top-80 right-10 w-[600px] h-[600px] bg-orange-200/30 rounded-full blur-[120px] filter animate-blob-2 pointer-events-none"></div>
+      <div className="absolute top-[1600px] left-10 w-[400px] h-[400px] bg-rose-200/25 rounded-full blur-[100px] filter animate-blob-1 pointer-events-none"></div>
 
       {/* Hero Section */}
-      <section className="relative text-center py-24 px-6 rounded-3xl border border-stone-200/40 overflow-hidden bg-white/50 backdrop-blur-sm shadow-xl shadow-stone-100/50">
-        {/* Subtle Tech Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7e5e430_1px,transparent_1px),linear-gradient(to_bottom,#e7e5e430_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+      <section className="relative text-center py-28 px-6 rounded-3xl border border-stone-200/40 overflow-hidden bg-white/50 backdrop-blur-md shadow-xl shadow-stone-100/50">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7e5e435_1px,transparent_1px),linear-gradient(to_bottom,#e7e5e435_1px,transparent_1px)] bg-[size:5rem_5rem]"></div>
         
         <div className="relative z-10 max-w-5xl mx-auto space-y-8">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200/60 text-amber-900 text-xs px-4 py-2 rounded-full font-bold tracking-wider uppercase shadow-sm">
-            <Sparkles size={14} className="text-amber-600 animate-spin" style={{ animationDuration: '3s' }} /> 
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200/60 text-amber-900 text-xs px-4.5 py-2 rounded-full font-bold tracking-wider uppercase shadow-sm">
+            <Sparkles size={14} className="text-amber-600 animate-spin" style={{ animationDuration: '4s' }} /> 
             AI-Driven HR Analytics Engine
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold text-stone-900 leading-tight tracking-tight">
-            Supercharge Your Talent with <br />
+            Unlock the Real Potential of <br />
             <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-rose-600 bg-clip-text text-transparent drop-shadow-sm font-black">
-              Next-Gen AI Insights
+              Your Workforce
             </span>
           </h1>
 
@@ -111,14 +182,14 @@ const Home = () => {
             </Link>
             
             <a
-              href="#about"
-              className="bg-white/80 hover:bg-stone-50 text-stone-700 font-semibold px-9 py-4 rounded-xl border border-stone-200/80 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] backdrop-blur-sm"
+              href="#playground"
+              className="bg-white/95 hover:bg-stone-50 text-stone-700 font-semibold px-9 py-4 rounded-xl border border-stone-200/80 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
             >
-              Discover Features
+              Try AI Sandbox <ArrowDown size={16} className="animate-bounce" />
             </a>
           </div>
 
-          {/* Quick Stat Badges inside Hero */}
+          {/* Quick Stat Badges */}
           <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-stone-200/60 mt-12">
             <div className="text-center">
               <div className="text-3xl font-black text-amber-700">99.8%</div>
@@ -136,6 +207,119 @@ const Home = () => {
               <div className="text-3xl font-black text-stone-800">100+</div>
               <div className="text-xs font-semibold text-stone-500 uppercase tracking-wider mt-1">Teams Empowered</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW FEATURE: INTERACTIVE PLAYGROUND SANDBOX */}
+      <section id="playground" className="max-w-6xl mx-auto px-4 scroll-mt-24 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-1.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs px-3.5 py-1.5 rounded-full font-bold uppercase tracking-wider">
+            <Brain size={14} className="text-rose-600" /> Interactive Simulation
+          </div>
+          <h2 className="text-4xl font-extrabold text-stone-900 tracking-tight">Try the AI Performance Sandbox</h2>
+          <p className="text-stone-600">
+            Click on a mock employee card below to trigger a live simulated AI performance inference request, analyzing skill coverage and promotional paths.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Sidebar Employee Selector Grid */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
+            {mockEmployees.map((emp, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTab(idx)}
+                className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between group shadow-sm ${
+                  activeTab === idx
+                    ? 'bg-amber-600 border-amber-600 text-white translate-x-2 shadow-lg shadow-amber-600/20'
+                    : 'bg-white border-stone-200 hover:border-amber-300 text-stone-700 hover:-translate-y-0.5'
+                }`}
+              >
+                <div className="space-y-1.5">
+                  <h4 className={`font-bold text-lg ${activeTab === idx ? 'text-white' : 'text-stone-950'}`}>
+                    {emp.name}
+                  </h4>
+                  <p className={`text-xs ${activeTab === idx ? 'text-amber-100' : 'text-stone-500'}`}>
+                    {emp.role} • {emp.experience} yrs experience
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {emp.skills.slice(0, 3).map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className={`text-[10px] px-2.5 py-0.5 rounded-full font-semibold border ${
+                          activeTab === idx
+                            ? 'bg-amber-500/30 border-amber-400 text-white'
+                            : 'bg-stone-50 border-stone-200 text-stone-600'
+                        }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end gap-1.5">
+                  <div className={`text-xs font-bold px-2.5 py-1 rounded-lg border ${
+                    activeTab === idx
+                      ? 'bg-amber-700 border-amber-500 text-white'
+                      : emp.score >= 90 ? 'bg-emerald-50 border-emerald-200 text-emerald-700' : 'bg-amber-50 border-amber-200 text-amber-700'
+                  }`}>
+                    Score: {emp.score}%
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Interactive AI Terminal Output Console */}
+          <div className="lg:col-span-7 bg-[#1c1917] rounded-3xl border border-stone-800 text-stone-100 p-8 flex flex-col justify-between relative shadow-2xl overflow-hidden min-h-[420px] console-glow">
+            {/* Terminal Accent Header */}
+            <div className="flex items-center justify-between border-b border-stone-800 pb-4 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500 block"></span>
+                <span className="w-3 h-3 rounded-full bg-yellow-500 block"></span>
+                <span className="w-3 h-3 rounded-full bg-green-500 block"></span>
+                <span className="text-xs text-stone-500 font-mono ml-2">elevatehr-model-v4.bin</span>
+              </div>
+              <span className="text-xs font-mono px-2 py-0.5 rounded border border-stone-800 text-stone-400 bg-stone-900/50">
+                latency: 120ms
+              </span>
+            </div>
+
+            {/* Simulated Live Output Console state */}
+            <div className="flex-grow font-mono text-sm leading-relaxed whitespace-pre-wrap select-none overflow-y-auto">
+              {isSimulating ? (
+                <div className="h-full flex flex-col justify-center items-center gap-4 py-16 text-stone-400">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-amber-500/20"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
+                  </div>
+                  <div className="space-y-1 text-center">
+                    <p className="text-sm font-semibold tracking-wide text-stone-300">COMPILING ENTERPRISE VECTOR MAP...</p>
+                    <p className="text-xs text-stone-500">Querying OpenRouter API endpoints...</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center bg-stone-900/60 p-3 rounded-lg border border-stone-800 text-xs">
+                    <span className="text-stone-400">INPUT: _id: {mockEmployees[activeTab].name.toLowerCase().replace(" ", "_")}</span>
+                    <span className="text-emerald-500 font-bold">● CONNECTED</span>
+                  </div>
+                  <div className="text-amber-500/90 text-sm leading-relaxed font-semibold">
+                    {typedResponse}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Interactive Footer */}
+            {inferenceComplete && (
+              <div className="border-t border-stone-800 pt-4 mt-4 flex justify-between items-center text-xs text-stone-500 font-mono">
+                <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-emerald-500" /> Secure SSL Inference</span>
+                <span className="text-amber-500/80">Completed successfully</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -201,7 +385,6 @@ const Home = () => {
 
       {/* Testimonials Section */}
       <section className="bg-gradient-to-b from-stone-100 to-stone-200/40 py-20 px-6 rounded-3xl border border-stone-200/50 shadow-inner relative overflow-hidden">
-        {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(#e7e5e4_1px,transparent_1px)] [background-size:16px_16px] opacity-60 pointer-events-none"></div>
         
         <div className="relative z-10 max-w-6xl mx-auto space-y-16">
@@ -221,7 +404,6 @@ const Home = () => {
                 key={idx} 
                 className="bg-white p-8 rounded-2xl shadow-md border border-stone-150 flex flex-col justify-between space-y-8 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group relative overflow-hidden"
               >
-                {/* Visual Accent Bar */}
                 <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${t.accent}`} />
                 
                 <div className="space-y-4">
@@ -263,7 +445,6 @@ const Home = () => {
         </div>
 
         <div className="bg-white p-10 rounded-3xl border border-stone-200/80 shadow-xl shadow-stone-100/50 relative overflow-hidden group">
-          {/* Subtle warm decoration inside feedback */}
           <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-200/20 to-transparent rounded-bl-full pointer-events-none"></div>
           
           {submitted ? (
